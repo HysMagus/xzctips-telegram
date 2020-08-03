@@ -39,7 +39,7 @@ class BoilerPlate:
         return send
 
 token = ''
-offset = 0                  #MODIFY TO -1 TO READ ONLY THE LAST MESSAGE AND IGNORE ALL PREVIOUS MESSAGE. OTHERWISE DO NOT CHANGE
+offset = 0                 #MODIFY TO -1 TO READ ONLY THE LAST MESSAGE AND IGNORE ALL PREVIOUS MESSAGE. OTHERWISE DO NOT CHANGE
 bot = BoilerPlate(token)    #bot.get_updates(offset = update_id+1) IS USED TO PREVENT THE BOT FROM READING THE SAME MESSAGE
 
 def starter():
@@ -47,7 +47,7 @@ def starter():
     while True:
         all_updates = bot.get_updates(offset)
         for current_updates in all_updates:
-           # print(current_updates)
+            print(current_updates)
             update_id = current_updates['update_id']
             if 'edited_message' in current_updates:
                 bot.get_updates(offset = update_id+1)
