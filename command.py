@@ -172,6 +172,19 @@ def bot_message_handler(current_updates, update_id, sender_id, group_id, dict_ch
             else:
                 bot.send_message(group_id, 'Please set a username from the Telegram Settings')
                 bot.get_updates(offset = update_id+1)
+                
+        if  text == '/history':
+            if 'username' in current_updates['message']['from']:
+                user = current_updates['message']['from']['username']
+                core = "/usr/bin/zcoin-cli"
+                result = subprocess.run([core,"listtransactions",user],stdout=subprocess.PIPE)
+                clean = (result.stdout.strip()).decode("utf-8")
+                bot.send_message(group_id, f'@{user} your current history is: {clean}')
+                bot.get_updates(offset = update_id+1)
+            else:
+                bot.send_message(group_id, 'Please set a username from the Telegram Settings')
+                bot.get_updates(offset = update_id+1)
+
 
         if  text == '/moon' or text == '/moon@zcointipbot':
             bot.send_message(group_id, "Moon mission inbound!")
